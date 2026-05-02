@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saniya Mehendi Art | Moradabad</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black:      #000000;
+      --black2:     #0a0a0a;
+      --black3:     #111111;
+      --gold1:      #ffd700;
+      --gold2:      #ffb800;
+      --gold3:      #e8960a;
+      --gold-glow:  rgba(255,215,0,0.55);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: #e0e0e0;
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+    }
+
+    /* ══ ANIMATIONS ══ */
+    @keyframes shimmer {
+      0%   { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+    @keyframes goldGlow {
+      0%,100% { text-shadow: 0 0 8px #ffd700, 0 0 20px #ffb800, 0 0 40px #ff8c00; }
+      50%      { text-shadow: 0 0 18px #fff700, 0 0 45px #ffd700, 0 0 90px #ffb800; }
+    }
+    @keyframes borderPulse {
+      0%,100% { box-shadow: 0 0 6px rgba(255,215,0,0.3), inset 0 0 4px rgba(255,215,0,0.03); }
+      50%      { box-shadow: 0 0 22px rgba(255,215,0,0.5), 0 0 44px rgba(255,180,0,0.2), inset 0 0 10px rgba(255,215,0,0.05); }
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(28px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    @keyframes spinSlow {
+      from { transform: translate(-50%,-50%) rotate(0deg); }
+      to   { transform: translate(-50%,-50%) rotate(360deg); }
+    }
+    @keyframes pulse {
+      0%,100% { opacity:.7; transform:scale(1); }
+      50%      { opacity:1;  transform:scale(1.06); }
+    }
+
+    /* ══ GOLD SHIMMER TEXT ══ */
+    .gold-shimmer {
+      background: linear-gradient(90deg,
+        #8B6914 0%, #D4A017 20%, #FFD700 35%,
+        #FFFACD 50%, #FFD700 65%, #D4A017 80%, #8B6914 100%
+      );
+      background-size: 400px 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+
+    /* ══ STAR PARTICLES ══ */
+    body::before {
+      content:'';
+      position:fixed; inset:0;
+      background-image:
+        radial-gradient(1px 1px at 8%  12%, rgba(255,215,0,.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 22% 44%, rgba(255,215,0,.35) 0%, transparent 100%),
+        radial-gradient(1px 1px at 48%  8%, rgba(255,215,0,.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 68% 58%, rgba(255,215,0,.35) 0%, transparent 100%),
+        radial-gradient(1px 1px at 83% 18%, rgba(255,215,0,.55) 0%, transparent 100%),
+        radial-gradient(1px 1px at 91% 78%, rgba(255,215,0,.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 33% 82%, rgba(255,215,0,.45) 0%, transparent 100%),
+        radial-gradient(1px 1px at 57% 93%, rgba(255,215,0,.3) 0%, transparent 100%),
+        radial-gradient(2px 2px at 14% 63%, rgba(255,215,0,.2) 0%, transparent 100%),
+        radial-gradient(2px 2px at 76% 38%, rgba(255,215,0,.2) 0%, transparent 100%);
+      pointer-events:none; z-index:0;
+    }
+
+    /* ══ HERO ══ */
+    header {
+      position:relative; min-height:100vh;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center; padding:60px 20px;
+      background:
+        radial-gradient(ellipse at 50% 0%,   rgba(255,180,0,.13) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 100%, rgba(255,140,0,.08) 0%, transparent 55%),
+        #000;
+      overflow:hidden; z-index:1;
+    }
+
+    /* rotating outer ring */
+    header::after {
+      content:'';
+      position:absolute; width:520px; height:520px;
+      border:1px solid rgba(255,215,0,.1); border-radius:50%;
+      top:50%; left:50%;
+      animation:spinSlow 30s linear infinite;
+      pointer-events:none;
+    }
+
+    .hero-ring-inner {
+      position:absolute; width:360px; height:360px;
+      border:1px solid rgba(255,215,0,.07); border-radius:50%;
+      top:50%; left:50%;
+      animation:spinSlow 18s linear infinite reverse;
+      pointer-events:none;
+    }
+
+    .hero-stars { font-size:1rem; letter-spacing:20px; color:var(--gold3);
+      animation:fadeUp 1s ease .1s both; position:relative; z-index:2; }
+
+    .hero-name {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(4rem,12vw,8.5rem); font-weight:700;
+      line-height:1; letter-spacing:6px;
+      animation:fadeUp 1s ease .3s both, goldGlow 3s ease-in-out 1.5s infinite;
+      position:relative; z-index:2; margin:4px 0 0;
+    }
+
+    .hero-subtitle {
+      font-family:'Cormorant Garamond',serif; font-style:italic;
+      font-size:clamp(1rem,3vw,1.6rem); letter-spacing:9px;
+      text-transform:uppercase; color:rgba(255,215,0,.65);
+      animation:fadeUp 1s ease .5s both; position:relative; z-index:2; margin-top:6px;
+    }
+
+    .hero-divider {
+      width:220px; height:1px; margin:22px auto;
+      position:relative; z-index:2; overflow:hidden;
+      animation:fadeUp 1s ease .6s both;
+    }
+    .hero-divider::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(90deg,transparent,#ffd700,#fffacd,#ffd700,transparent);
+      background-size:300px 100%; animation:shimmer 2.5s linear infinite;
+    }
+
+    .hero-urdu {
+      font-family:'Noto Nastaliq Urdu',serif;
+      font-size:clamp(1.3rem,3.5vw,1.9rem); color:rgba(255,220,70,.9);
+      direction:rtl; margin:4px 0 10px;
+      text-shadow:0 0 12px rgba(255,215,0,.3);
+      animation:fadeUp 1s ease .7s both; position:relative; z-index:2;
+    }
+
+    .hero-tag {
+      font-size:clamp(.75rem,1.6vw,.95rem); letter-spacing:4px;
+      color:rgba(255,215,0,.4); text-transform:uppercase;
+      animation:fadeUp 1s ease .8s both; position:relative; z-index:2;
+    }
+
+    .cta-btn {
+      display:inline-block; margin-top:36px; padding:15px 46px;
+      background:linear-gradient(135deg,var(--gold3),var(--gold1),var(--gold2));
+      background-size:200% 100%;
+      color:#000; font-family:'Playfair Display',serif; font-weight:700;
+      font-size:.92rem; letter-spacing:3px; text-decoration:none;
+      text-transform:uppercase; position:relative; z-index:2;
+      transition:transform .3s,box-shadow .3s;
+      animation:fadeUp 1s ease 1s both;
+    }
+    .cta-btn:hover { transform:translateY(-3px); box-shadow:0 10px 34px rgba(255,215,0,.45); }
+
+    /* ══ SECTIONS ══ */
+    .sec-wrap { position:relative; z-index:1; }
+    .sec-dark  { background:#000; }
+    .sec-dark2 { background:#080808; }
+
+    section { max-width:940px; margin:0 auto; padding:88px 24px; text-align:center; }
+
+    .sec-label {
+      font-size:.66rem; letter-spacing:8px; text-transform:uppercase;
+      color:var(--gold3); margin-bottom:10px;
+    }
+    .sec-title {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2rem,5vw,3.2rem); font-weight:700; margin-bottom:4px;
+    }
+
+    .ornament {
+      display:flex; align-items:center; justify-content:center;
+      gap:14px; margin:22px auto 48px;
+    }
+    .orn-bar { height:1px; width:80px; position:relative; overflow:hidden; }
+    .orn-bar::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(90deg,transparent,var(--gold1),transparent);
+      background-size:200px 100%; animation:shimmer 2.2s linear infinite;
+    }
+    .orn-gem {
+      color:var(--gold1); font-size:1rem;
+      animation:pulse 2.2s ease-in-out infinite;
+      text-shadow:0 0 12px var(--gold-glow);
+    }
+
+    /* ══ CARDS ══ */
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:20px; }
+
+    .card {
+      background:#0c0c0c; border:1px solid rgba(255,215,0,.14);
+      border-top:2px solid var(--gold2); padding:36px 20px;
+      position:relative; overflow:hidden;
+      transition:transform .35s,box-shadow .35s;
+      animation:borderPulse 4s ease-in-out infinite;
+    }
+    .card::before {
+      content:''; position:absolute; top:0; left:-100%;
+      width:60%; height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,215,0,.05),transparent);
+      transition:left .55s;
+    }
+    .card:hover::before { left:150%; }
+    .card:hover { transform:translateY(-8px); box-shadow:0 18px 54px rgba(255,180,0,.2),0 0 0 1px rgba(255,215,0,.22); }
+
+    .card-icon  { font-size:2.4rem; margin-bottom:16px; }
+    .card-title { font-family:'Playfair Display',serif; font-size:1.1rem; margin-bottom:10px; }
+    .card-desc  { font-size:.87rem; color:#777; line-height:1.65; }
+
+    /* ══ ABOUT ══ */
+    .about-inner { display:flex; flex-direction:column; align-items:center; gap:32px; }
+
+    .avatar-ring {
+      position:relative; width:214px; height:214px;
+    }
+    .avatar-ring::before {
+      content:''; position:absolute; inset:-5px; border-radius:50%;
+      background:conic-gradient(from 0deg,#8B6914,#FFD700,#FFFACD,#FFD700,#8B6914,#FFD700,#8B6914);
+      animation:spinSlow 4s linear infinite; z-index:0;
+    }
+    .avatar-ring::after {
+      content:''; position:absolute; inset:-2px; border-radius:50%;
+      background:#000; z-index:1;
+    }
+    .avatar-circle {
+      position:relative; z-index:2; width:214px; height:214px;
+      border-radius:50%; background:radial-gradient(circle at 40% 35%,#1c1400,#000);
+      display:flex; align-items:center; justify-content:center; font-size:5.5rem;
+    }
+
+    .about-text { font-size:1.05rem; line-height:2; color:#888; max-width:630px; }
+
+    /* ══ GALLERY ══ */
+    .gallery-strip { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+    .gallery-item {
+      width:130px; height:130px;
+      border:1px solid rgba(255,215,0,.18);
+      display:flex; align-items:center; justify-content:center;
+      font-size:3.5rem; background:#0a0a0a;
+      position:relative; overflow:hidden; transition:transform .3s,box-shadow .3s;
+    }
+    .gallery-item::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg,transparent 40%,rgba(255,215,0,.05) 100%);
+    }
+    .gallery-item:hover { transform:scale(1.1); box-shadow:0 0 26px rgba(255,215,0,.35); border-color:var(--gold1); }
+
+    /* ══ CONTACT ══ */
+    .contact-wrap {
+      background:radial-gradient(ellipse at 50% 0%,rgba(255,180,0,.07) 0%,transparent 55%),#000;
+      padding:88px 24px;
+    }
+    .contact-inner { max-width:720px; margin:0 auto; text-align:center; }
+
+    .contact-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:18px; margin-top:10px; }
+
+    .contact-card {
+      background:#0c0c0c; border:1px solid rgba(255,215,0,.18); padding:30px 18px;
+      animation:borderPulse 5s ease-in-out infinite;
+    }
+    .contact-card .icon  { font-size:1.9rem; margin-bottom:14px; }
+    .contact-card .clabel { font-size:.64rem; letter-spacing:5px; text-transform:uppercase; color:var(--gold3); margin-bottom:8px; }
+    .contact-card .cvalue { font-family:'Playfair Display',serif; font-size:1rem; line-height:1.65; color:rgba(255,215,0,.85); }
+    .contact-card .cvalue a { color:inherit; text-decoration:none; }
+
+    .wa-btn {
+      display:inline-flex; align-items:center; gap:10px;
+      margin-top:38px; padding:14px 44px;
+      background:#111; border:1px solid #25D366;
+      color:#25D366; font-family:'Playfair Display',serif; font-weight:700;
+      font-size:1rem; text-decoration:none; letter-spacing:2px;
+      transition:all .3s;
+    }
+    .wa-btn:hover { background:#25D366; color:#000; box-shadow:0 0 26px rgba(37,211,102,.4); }
+
+    /* ══ FOOTER ══ */
+    footer {
+      background:#000; border-top:1px solid rgba(255,215,0,.1);
+      text-align:center; padding:26px 20px;
+      font-size:.75rem; letter-spacing:3px; color:rgba(255,215,0,.28);
+    }
+    footer .gw { color:var(--gold2); }
+
+    /* ══ SCROLL REVEAL ══ */
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .75s ease,transform .75s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header>
+  <div class="hero-ring-inner"></div>
+
+  <p class="hero-stars">✦ &nbsp; ✦ &nbsp; ✦</p>
+  <h1 class="hero-name gold-shimmer">Saniya</h1>
+  <p class="hero-subtitle">Mehendi Artist</p>
+  <div class="hero-divider"></div>
+  <p class="hero-urdu">مہندی کا فن، ہر موقعے کی زینت</p>
+  <p class="hero-tag">Bridal &nbsp;·&nbsp; Arabic &nbsp;·&nbsp; Full Hand &nbsp;·&nbsp; Party Designs</p>
+  <a href="tel:8923250917" class="cta-btn">📞 Abhi Book Karein</a>
+</header>
+
+<!-- SERVICES -->
+<div class="sec-wrap sec-dark">
+  <section>
+    <p class="sec-label reveal">Hamaari Khasiyat</p>
+    <h2 class="sec-title gold-shimmer reveal">Kya Karte Hain Hum?</h2>
+    <div class="ornament reveal">
+      <div class="orn-bar"></div><span class="orn-gem">❋</span><div class="orn-bar"></div>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="card-icon">👰</div>
+        <div class="card-title gold-shimmer">Bridal Mehendi</div>
+        <div class="card-desc">Dulhan ke liye khoobsurat aur gehre rang wali traditional mehendi.</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🌿</div>
+        <div class="card-title gold-shimmer">Arabic Mehendi</div>
+        <div class="card-desc">Modern Arabic patterns jo haath ko aur bhi sundar banate hain.</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🎉</div>
+        <div class="card-title gold-shimmer">Party Mehendi</div>
+        <div class="card-desc">Har khushi ke mauke ke liye stylish aur quick designs.</div>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">✋</div>
+        <div class="card-title gold-shimmer">Full Hand Design</div>
+        <div class="card-desc">Poore haath par detailed aur intricate patterns.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ABOUT -->
+<div class="sec-wrap sec-dark2">
+  <section>
+    <p class="sec-label reveal">Hamare Baare Mein</p>
+    <h2 class="sec-title gold-shimmer reveal">Saniya — Mehendi Ki Ustaad</h2>
+    <div class="ornament reveal">
+      <div class="orn-bar"></div><span class="orn-gem">❋</span><div class="orn-bar"></div>
+    </div>
+    <div class="about-inner">
+      <div class="avatar-ring reveal">
+        <div class="avatar-circle">🌸</div>
+      </div>
+      <p class="about-text reveal">
+        Saniya ek maahir mehendi artist hain jo Moradabad mein kaafi saalon se apni kala se logon ki khushiyon ko rang de rahi hain. Bridal se lekar casual parties tak, unka kaam har baar dil ko chhoo jaata hai. Natural rang aur maheen design unki pehchaan hai.
+      </p>
+    </div>
+  </section>
+</div>
+
+<!-- GALLERY -->
+<div class="sec-wrap sec-dark">
+  <section>
+    <p class="sec-label reveal">Humara Kaam</p>
+    <h2 class="sec-title gold-shimmer reveal">Design Gallery</h2>
+    <div class="ornament reveal">
+      <div class="orn-bar"></div><span class="orn-gem">❋</span><div class="orn-bar"></div>
+    </div>
+    <div class="gallery-strip">
+      <div class="gallery-item reveal">🌺</div>
+      <div class="gallery-item reveal">🌸</div>
+      <div class="gallery-item reveal">🌼</div>
+      <div class="gallery-item reveal">🌹</div>
+      <div class="gallery-item reveal">✿</div>
+      <div class="gallery-item reveal">🍃</div>
+    </div>
+  </section>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-wrap">
+  <div class="contact-inner">
+    <p class="sec-label reveal">Hamare Saath Judein</p>
+    <h2 class="sec-title gold-shimmer reveal">Sampark Karein</h2>
+    <div class="ornament reveal">
+      <div class="orn-bar"></div><span class="orn-gem">❋</span><div class="orn-bar"></div>
+    </div>
+    <div class="contact-cards">
+      <div class="contact-card reveal">
+        <div class="icon">📍</div>
+        <div class="clabel">Pata</div>
+        <div class="cvalue">Asalatpura, Ismail Road<br>Moradabad</div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="icon">📞</div>
+        <div class="clabel">Phone</div>
+        <div class="cvalue"><a href="tel:8923250917">8923250917</a></div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="icon">⏰</div>
+        <div class="clabel">Samay</div>
+        <div class="cvalue">Subah 9 Baje se<br>Shaam 8 Baje Tak</div>
+      </div>
+    </div>
+    <a href="https://wa.me/918923250917?text=Namaste%20Saniya%20Ji%2C%20Mehendi%20book%20karni%20hai" class="wa-btn" target="_blank">
+      💬 WhatsApp Par Baat Karein
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 &nbsp;<span class="gw">Saniya Mehendi Art</span>&nbsp; · Moradabad · All Rights Reserved</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 70);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
